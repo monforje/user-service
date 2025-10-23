@@ -2,10 +2,10 @@ package postgres
 
 import "github.com/jmoiron/sqlx"
 
-type userRepo struct {
+type UserRepo struct {
 	db *sqlx.DB
 }
 
-func newUserRepo(db *sqlx.DB) UserRepository {
-	return &userRepo{db: db}
+func NewUserRepo(db *sqlx.DB) *UserRepo {
+	return &UserRepo{db: db}
 }

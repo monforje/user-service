@@ -7,7 +7,7 @@ import (
 	"github.com/monforje/user-service/internal/entity"
 )
 
-func (r *userRepo) CreateUser(ctx context.Context, user *entity.User) (int64, error) {
+func (r *UserRepo) CreateUser(ctx context.Context, user *entity.User) (int64, error) {
 	query := `
 		INSERT INTO users (telegram_id, phone, username, created_at, updated_at)
 		VALUES (:telegram_id, :phone, :username, :created_at, :updated_at)
@@ -33,7 +33,7 @@ func (r *userRepo) CreateUser(ctx context.Context, user *entity.User) (int64, er
 	return id, nil
 }
 
-func (r *userRepo) UpdateUser(ctx context.Context, user *entity.User) error {
+func (r *UserRepo) UpdateUser(ctx context.Context, user *entity.User) error {
 	query := `
 		UPDATE users
 		SET phone = :phone,
@@ -48,7 +48,7 @@ func (r *userRepo) UpdateUser(ctx context.Context, user *entity.User) error {
 	return err
 }
 
-func (r *userRepo) DeleteUser(ctx context.Context, telegramID int64) error {
+func (r *UserRepo) DeleteUser(ctx context.Context, telegramID int64) error {
 	query := `DELETE FROM users WHERE telegram_id = $1`
 	_, err := r.db.ExecContext(ctx, query, telegramID)
 	return err

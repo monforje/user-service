@@ -11,7 +11,7 @@ import (
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
-	"github.com/monforje/user-service/internal/infrastructure/db"
+	"github.com/monforje/user-service/internal/infrastructure/database"
 	"github.com/monforje/user-service/internal/repository"
 	"github.com/monforje/user-service/internal/service"
 	"github.com/monforje/user-service/internal/transport/http"
@@ -20,7 +20,7 @@ import (
 
 type App struct {
 	cfg      *config.Config
-	pg       *db.Postgres
+	pg       *database.Postgres
 	repos    *repository.Repository
 	services *service.Service
 	handlers *http.Handler
@@ -32,7 +32,7 @@ func New() (*App, error) {
 
 	a.cfg = config.New()
 
-	a.pg = db.New(a.cfg.Postgres)
+	a.pg = database.New(a.cfg.Postgres)
 
 	a.repos = repository.New(a.pg.DB)
 

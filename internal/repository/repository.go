@@ -5,6 +5,7 @@ import (
 
 	"github.com/jmoiron/sqlx"
 	"github.com/monforje/user-service/internal/entity"
+	"github.com/monforje/user-service/internal/repository/postgres"
 )
 
 type UserRepository interface {
@@ -21,6 +22,6 @@ type Repository struct {
 
 func New(db *sqlx.DB) *Repository {
 	return &Repository{
-		User: newUserRepo(db),
+		User: postgres.NewUserRepo(db),
 	}
 }
